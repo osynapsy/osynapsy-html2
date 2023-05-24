@@ -1,6 +1,6 @@
 {
     "name": "osynapsy/osynapsy-html2",
-    "version": "1.0.1",
+    "version": "1.0",
     "homepage": "http://www.osynapsy.net/html2",
     "type": "library",
     "description": "Osynapsy html library",
@@ -10,7 +10,7 @@
         {
             "name": "Pietro Celeste",
             "email": "p.celeste@osynapsy.net",
-            "homepage": "https://github.com/osynapsy/osynapsy-html/wiki"
+            "homepage": "https://github.com/osynapsy/osynapsy-html2/wiki"
         }
     ],
     "require": {

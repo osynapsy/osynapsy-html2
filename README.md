@@ -5,7 +5,7 @@ OsynapsyHtml is a library for build html tag and components in Php.
 It's recommended that you use [Composer](https://getcomposer.org/) to install osynapsy-html.
 
 ```bash
-$ composer require osynapsy.net/osynapsy-html "@stable"
+$ composer require osynapsy.net/osynapsy-html2 "@stable"
 ```
 
 ## Usage
