@@ -1,68 +1,38 @@
 <?php
-
-/*
- * This file is part of the Osynapsy package.
- *
- * (c) Pietro Celeste <p.celeste@osynapsy.net>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Osynapsy\Html\Component;
 
-use Osynapsy\Html\Tag;
-
-class Radio extends Base
+/**
+ * Description of Radio
+ *
+ * @author Pietro Celeste <p.celeste@osynapsy.net>
+ */
+class Radio extends Input
 {
-    protected $label;
-    protected $radio;
     protected $checked;
     
-    public function __construct($id, $label, $value = null)
+    public function __construct($id, $name, $value = 1)
     {
-        parent::__construct('span', $id.'_box');
-        $this->label = $label;
-        $this->radio = $this->radioFactory($id, $value);
+        parent::__construct($id, $name, 'radio');
+        $this->setValue($value);
     }
-
-    protected function radioFactory($id, $value)
-    {
-        $radio = new Tag('input', $id);
-        $radio->attributes([
-            'type' => 'radio',
-            'name' => $id,
-            'value' => $value
-        ]);
-        return $radio;
-    }
-
-    public function build($depth = 0)
+    
+    public function preBuild()
     {
         if ($this->checked) {
-            $this->getRadio()->attribute('checked','checked');
+            $this->attribute('checked', 'checked');
         }
-        $this->add($this->getRadio());
-        if (!empty($this->label)) {
-            $this->add(' '.$this->label);
-        }
-        return parent::build($depth);
-    }  
-
-    public function getRadio()
-    {
-        return $this->radio;
     }
-
+    
     public function setDisabled($condition)
     {
         if ($condition) {
-            $this->getRadio()->attribute('disabled', 'disabled');
+            $this->attribute('disabled', 'disabled');
         }
+        return $this;
     }
     
     public function setChecked($condition)
-    {    
-        $this->checked = $condition ? true : false;    
+    {        
+        $this->checked = $condition ? true : false;        
     }
 }
