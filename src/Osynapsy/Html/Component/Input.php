@@ -13,7 +13,7 @@ namespace Osynapsy\Html\Component;
 
 use Osynapsy\Html\Component\Base;
 
-class InputBox extends Base
+class Input extends Base
 {
     protected $value;
     

@@ -12,7 +12,7 @@
 namespace Osynapsy\Html\Component;
 
 
-class HiddenBox extends InputBox
+class Hidden extends Input
 {
     public function __construct($id, $name = null, $class = '')
     {

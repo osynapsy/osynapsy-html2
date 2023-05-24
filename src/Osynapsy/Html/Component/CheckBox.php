@@ -11,12 +11,9 @@
 
 namespace Osynapsy\Html\Component;
 
-use Osynapsy\Html\Tag;
-
 class CheckBox extends Base
 {
-    private $checkbox = null;
-    private $checked = false;
+    private $checkbox = null;    
     private $label;
 
     public function __construct($id, $label = '', $value = '1', $tag = 'span')
@@ -28,21 +25,12 @@ class CheckBox extends Base
 
     protected function checkboxFactory($id, $value)
     {
-        $checkbox = new Tag('input', $id);
-        $checkbox->attributes([
-            'type' => 'checkbox', 
-            'name' => $id, 
-            'value' => $value
-        ]);
-        return $checkbox;
+        return new Check($id, $id, $value);
     }
 
     public function preBuild()
     {
-        $checkBoxId = $this->getCheckbox()->getAttribute('id');
-        if ($this->checked) {
-            $this->getCheckbox()->attribute('checked', 'checked');
-        }
+        $checkBoxId = $this->getCheckbox()->getAttribute('id');        
         if (strpos($this->getCheckbox()->name, '[') === false) {
             $this->add($this->hiddenFieldFactory($checkBoxId));
         }
@@ -61,17 +49,16 @@ class CheckBox extends Base
     {
         return $this->checkbox;
     }
-
+    
     public function setDisabled($condition)
-    {
-        if ($condition) {
-            $this->getCheckbox()->attribute('disabled', 'disabled');
-        }
+    {        
+        $this->getCheckbox()->setDisabled($condition);
         return $this;
     }
     
     public function setChecked($condition)
     {        
-        $this->checked = $condition ? true : false;        
+        $this->getCheckbox()->setChecked($condition);
+        return $this;
     }
 }

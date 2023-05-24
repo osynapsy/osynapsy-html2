@@ -11,7 +11,7 @@
 
 namespace Osynapsy\Html\Component;
 
-class PasswordBox extends InputBox
+class Password extends Input
 {
     public function __construct($name, $id = null)
     {
