@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use Osynapsy\Html\Component\Radio;
+use Osynapsy\Html\Component\RadioBox;
 require_once 'StringClean.php';
 
 final class RadioBoxTest extends TestCase
@@ -11,7 +11,7 @@ final class RadioBoxTest extends TestCase
     
     public function testRadioBox(): void
     {
-        $RadioBox = new Radio('test', 'test', '1');
+        $RadioBox = new RadioBox('test', 'test', '1');
         $this->assertEquals(
             '<span id="test_box"><input id="test" type="radio" name="test" value="1"> test</span>',
             $this->tabAndEolRemove((string) $RadioBox)
@@ -20,7 +20,7 @@ final class RadioBoxTest extends TestCase
 
     public function testRadioBoxDisabled(): void
     {
-        $RadioBox = new Radio('test', 'test', '1');
+        $RadioBox = new RadioBox('test', 'test', '1');
         $RadioBox->setDisabled(true);
         $this->assertEquals(
             '<span id="test_box"><input id="test" type="radio" name="test" value="1" disabled="disabled"> test</span>',
@@ -31,7 +31,7 @@ final class RadioBoxTest extends TestCase
     public function testRadioBoxChecked(): void
     {
         $_REQUEST['radioTest'] = '9';
-        $RadioBox = new Radio('radioTest', 'labelTest', '9');
+        $RadioBox = new RadioBox('radioTest', 'labelTest', '9');
         $RadioBox->setChecked(($_REQUEST['radioTest'] === '9'));
         $this->assertEquals(
             '<span id="radioTest_box"><input id="radioTest" type="radio" name="radioTest" value="9" checked="checked"> labelTest</span>',
