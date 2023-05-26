@@ -22,13 +22,18 @@ class Input extends Base
         parent::__construct('input', $id);
         $this->attributes([
             'type' => $type,
-            'name' => $name
+            'name' => $name            
         ]);             
-    }   
+    }
+    
+    public function getValue()
+    {
+        return $this->getAttribute('value');
+    }
 
     public function setValue($value)
     {
-        $this->attributes(['value' => $value]);
+        $this->attribute('value', $value);
         return $this;
     }
 }
