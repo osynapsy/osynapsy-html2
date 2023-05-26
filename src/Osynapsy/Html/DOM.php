@@ -45,7 +45,7 @@ class DOM
      * @param $file web path of file;
      * @return void
      */
-    public function requireJs($file)
+    public static function requireJs($file)
     {
         self::requireFile($file, 'js');
     }
@@ -56,7 +56,7 @@ class DOM
      * @param $code js code to append at html page;
      * @return void
      */
-    public function requireJsCode($code)
+    public static function requireJsCode($code)
     {
         self::requireFile($code, 'jscode');
     }
@@ -67,7 +67,7 @@ class DOM
      * @param $file web path of css file;
      * @return void
      */
-    public function requireCss($file)
+    public static function requireCss($file)
     {
         self::requireFile($file, 'css');
     }
