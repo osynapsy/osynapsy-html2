@@ -71,6 +71,16 @@ class DOM
     {
         self::requireFile($file, 'css');
     }
+    
+    protected static function requireFile($file, $type)
+    {
+        if (!array_key_exists($type, self::$require)) {
+            self::$require[$type] = [];
+        } elseif (in_array($file, self::$require[$type])) {
+            return;
+        }
+        self::$require[$type][] = $file;        
+    }
 
     protected static function requireAssetFile($file, $type)
     {
