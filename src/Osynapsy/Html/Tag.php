@@ -89,7 +89,8 @@ class Tag
 
     public function addClass($class)
     {
-        return $class ? $this->appendToAttribute('class', $class) : $this;
+        $this->appendToAttribute('class', $class);
+        return $this;
     }
 
     public function addStyle($style, $value)
