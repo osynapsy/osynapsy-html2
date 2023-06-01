@@ -60,7 +60,7 @@ class DOM
      */
     public static function requireJsCode($code)
     {
-        self::requireFile($code, 'jscode');
+        self::requireFile($code, 'script');
     }
 
     /**
@@ -76,13 +76,12 @@ class DOM
     
     protected static function requireFile($file, $type)
     {
-        if (!array_key_exists($type, self::$require)) {
-            self::$require[$type] = [];
-        } elseif (in_array($file, self::$require[$type])) {
+        $filePrefix = $file[0] === '/' ? '' : self::ASSET_ROOT;        
+        $item = [$filePrefix . $file, $type];
+        if (in_array($item, self::$require)) {
             return;
-        }
-        $filePrefix = $file[0] === '/' ? '' : self::ASSET_ROOT;
-        self::$require[$type][] = $filePrefix . $file;        
+        }        
+        self::$require[] = $item;
     }
 
     protected static function requireAssetFile($file, $type)
