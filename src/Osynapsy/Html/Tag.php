@@ -109,7 +109,7 @@ class Tag
     public function attribute($attribute, $value)
     {        
         if (is_array($value)) {
-            throw \Exception('Illegal content of value attribute' . print_r($value, true));
+            throw new \Exception('Illegal content of value attribute' . print_r($value, true));
         }
         $this->attributes[$attribute] = $value;
         return $this;
