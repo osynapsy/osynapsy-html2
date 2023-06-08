@@ -2,17 +2,17 @@
 namespace Osynapsy\Html\Component;
 
 /**
- * Description of Radio
+ * InputCheck return an object of typy check
  *
  * @author Pietro Celeste <p.celeste@osynapsy.net>
  */
-class Radio extends Input
+class InputCheckBox extends Input
 {
     protected $checked;
     
     public function __construct($id, $name, $value = 1)
     {
-        parent::__construct($id, $name, 'radio');
+        parent::__construct($id, $name, 'checkbox');
         $this->setValue($value);
     }
     

@@ -25,7 +25,7 @@ class CheckBox extends Base
 
     protected function checkboxFactory($id, $value)
     {
-        return new Check($id, $id, $value);
+        return new InputCheckBox($id, $id, $value);
     }
 
     public function preBuild()

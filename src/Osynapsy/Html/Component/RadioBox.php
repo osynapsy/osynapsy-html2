@@ -26,7 +26,7 @@ class RadioBox extends Base
 
     protected function radioFactory($id, $value)
     {
-        return new Radio($id, $id, $value);
+        return new InputRadio($id, $id, $value);
     }
 
     public function preBuild()
