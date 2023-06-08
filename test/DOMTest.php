@@ -11,7 +11,7 @@ final class DOMTest extends TestCase
         DOM::requireCss('base/textbox/style.css');
         $requiredFiles = DOM::getRequire();        
         $this->assertIsArray($requiredFiles);
-        $this->assertArrayHasKey('css', $requiredFiles);
-        $this->assertEquals(['css' => ['/assets/vendor/osynapsy/base/textbox/style.css']], $requiredFiles);        
+       // $this->assertArrayHasKey('css', $requiredFiles);
+        $this->assertEquals([['/assets/vendor/osynapsy/base/textbox/style.css', 'css']], $requiredFiles);        
     }   
 }

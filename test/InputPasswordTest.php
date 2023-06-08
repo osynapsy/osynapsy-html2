@@ -2,23 +2,23 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use Osynapsy\Html\Component\Password;
+use Osynapsy\Html\Component\InputPassword;
 //require_once 'StringClean.php';
 
-final class PasswordTest extends TestCase
+final class InputPasswordTest extends TestCase
 {
-    public function testPassword(): void
+    public function testInputPassword(): void
     {
-        $TextBox = new Password('test');
+        $TextBox = new InputPassword('test');
         $this->assertEquals(
             '<input id="test" type="password" name="test" autocomplete="off">',
             (string) $TextBox
         );
     }
 
-    public function testPasswordBoxValue(): void
+    public function testInputPasswordBoxValue(): void
     {        
-        $TextBox = new Password('textBoxTest');
+        $TextBox = new InputPassword('textBoxTest');
         $TextBox->setValue('hello word!');
         $this->assertEquals(
             '<input id="textBoxTest" type="password" name="textBoxTest" autocomplete="off" value="hello word!">',
@@ -26,9 +26,9 @@ final class PasswordTest extends TestCase
         );
     }
 
-    public function testPasswordBoxWithAction(): void
+    public function testInputPasswordBoxWithAction(): void
     {
-        $TextBox = new Password('test');
+        $TextBox = new InputPassword('test');
         $TextBox->setAction('test', ['#p1','value']);
         $this->assertEquals(
             '<input id="test" type="password" name="test" autocomplete="off" class="change-execute" data-action="test" data-action-parameters="#p1,value">',
@@ -36,4 +36,3 @@ final class PasswordTest extends TestCase
         );
     }
 }
-
