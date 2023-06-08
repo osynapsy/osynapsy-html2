@@ -60,7 +60,7 @@ class DOM
      */
     public static function requireJsCode($code)
     {
-        self::requireFile($code, 'script');
+        self::$require[] = [$code, 'script'];
     }
 
     /**
