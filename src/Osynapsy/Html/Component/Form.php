@@ -36,4 +36,9 @@ class Form extends Base
     {
         return $this->panel;
     }
+
+    public function __call($name, $arguments)
+    {
+        return call_user_func_array([$this->getPanel(), $name], $arguments);
+    }
 }
