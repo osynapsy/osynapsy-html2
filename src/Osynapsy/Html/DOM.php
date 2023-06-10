@@ -30,6 +30,11 @@ class DOM
     {
         return self::$dom[$id] ?? null;
     }
+
+    public static function getAllComponents()
+    {
+        return self::$dom;
+    }
     
     /**
      * Return list of required file (css, js etc) for correct initialization of component
