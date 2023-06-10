@@ -1,12 +1,10 @@
 <?php
 namespace Osynapsy\Html;
 
-
-
 /**
  * Description of DOM
  *
- * @author peter
+ * @author Pietro Celeste <pietro.celeste@gmail.com>
  */
 class DOM
 {
