@@ -12,6 +12,7 @@ class DOM
     
     protected static $dom = [];
     protected static $require = [];
+    protected static $actions = [];
     
     public static function append($id, Tag $component)
     {
@@ -104,5 +105,10 @@ class DOM
     public function setJavascript($code)
     {
         self::$require['jscode'] = [$code];
+    }
+
+    public static function addAction($sourceId, $action, $event)
+    {        
+        self::$actions[$sourceId.'.'.$event] = $action;
     }
 }

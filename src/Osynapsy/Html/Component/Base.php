@@ -21,7 +21,7 @@ class Base extends Tag
 {    
     const EV_CLICK = 'click-execute';
     const EV_CHANGE = 'change-execute';
-    const EV_KEYPRESS = 'onkeypress-execute';
+    const EV_KEYPRESS = 'keypress-execute';
     
     protected $dataset = [];        
 
@@ -62,6 +62,7 @@ class Base extends Tag
         if (!empty($confirmMessage)) {
             $this->attribute('data-confirm', $confirmMessage);
         }
+        DOM::addAction($this->getAttribute('id'), $action, str_replace('-execute', '', $eventClass));
         return $this;
     }
 
