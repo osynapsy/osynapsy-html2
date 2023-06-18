@@ -18,12 +18,12 @@ use Osynapsy\Html\DOM;
  * Master class component
  */
 class Base extends Tag
-{    
+{
     const EV_CLICK = 'click-execute';
     const EV_CHANGE = 'change-execute';
     const EV_KEYPRESS = 'keypress-execute';
-    
-    protected $dataset = [];        
+
+    protected $dataset = [];
 
     public function __construct($tag, $id = null)
     {
@@ -31,8 +31,8 @@ class Base extends Tag
         if (!empty($id)) {
             DOM::append($id, $this);
         }
-    }               
-    
+    }
+
     /**
      * Return data array
      *
@@ -41,7 +41,7 @@ class Base extends Tag
     public function getDataset()
     {
         return $this->dataset;
-    }  
+    }
 
     /**
      * Set action to recall via ajax
@@ -62,7 +62,7 @@ class Base extends Tag
         if (!empty($confirmMessage)) {
             $this->attribute('data-confirm', $confirmMessage);
         }
-        DOM::addAction($this->getAttribute('id'), $action, str_replace('-execute', '', $eventClass));
+        DOM::addEventListener(str_replace('-execute', '', $eventClass), $this->getAttribute('id'), $action);
         return $this;
     }
 
@@ -76,7 +76,7 @@ class Base extends Tag
     {
         $this->dataset = $dataset;
         return $this;
-    }   
+    }
 
     /**
      * Set disabled property
@@ -90,7 +90,7 @@ class Base extends Tag
             $this->attribute('disabled', 'disabled');
         }
         return $this;
-    }   
+    }
 
     /**
      * Set placeholder attribute
@@ -116,5 +116,5 @@ class Base extends Tag
             $this->attribute('readonly', 'readonly');
         }
         return $this;
-    }   
+    }
 }

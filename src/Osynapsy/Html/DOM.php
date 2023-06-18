@@ -9,16 +9,16 @@ namespace Osynapsy\Html;
 class DOM
 {
     const ASSET_ROOT = '/assets/vendor/osynapsy/';
-    
+
     protected static $dom = [];
     protected static $require = [];
     protected static $actions = [];
-    
+
     public static function append($id, Tag $component)
     {
         self::$dom[$id] = $component;
     }
-    
+
     /**
      * Return component through his id
      *
@@ -34,7 +34,7 @@ class DOM
     {
         return self::$dom;
     }
-    
+
     /**
      * Return list of required file (css, js etc) for correct initialization of component
      *
@@ -44,7 +44,7 @@ class DOM
     {
         return self::$require;
     }
-    
+
     /**
      * Append required js file to list of required file
      *
@@ -77,14 +77,14 @@ class DOM
     {
         self::requireFile($file, 'css');
     }
-    
+
     protected static function requireFile($file, $type)
     {
-        $filePrefix = $file[0] === '/' ? '' : self::ASSET_ROOT;        
+        $filePrefix = $file[0] === '/' ? '' : self::ASSET_ROOT;
         $item = [$filePrefix . $file, $type];
         if (in_array($item, self::$require)) {
             return;
-        }        
+        }
         self::$require[] = $item;
     }
 
@@ -101,14 +101,14 @@ class DOM
         }
         self::$require[$type][] = $file;
     }
-    
+
     public function setJavascript($code)
     {
         self::$require['jscode'] = [$code];
     }
 
-    public static function addAction($sourceId, $action, $event)
-    {        
+    public static function addEventListener($event, $sourceId, $action)
+    {
         self::$actions[$sourceId.'.'.$event] = $action;
     }
 }
