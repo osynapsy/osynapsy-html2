@@ -8,8 +8,6 @@ namespace Osynapsy\Html;
  */
 class DOM
 {
-    const ASSET_ROOT = '/assets/vendor/osynapsy/';
-
     protected static $dom = [];
     protected static $require = [];
     protected static $actions = [];
@@ -80,8 +78,7 @@ class DOM
 
     protected static function requireFile($file, $type)
     {
-        $filePrefix = $file[0] === '/' ? '' : self::ASSET_ROOT;
-        $item = [$filePrefix . $file, $type];
+        $item = [$file, $type];
         if (in_array($item, self::$require)) {
             return;
         }
