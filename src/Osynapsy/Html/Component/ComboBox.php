@@ -12,12 +12,11 @@
 namespace Osynapsy\Html\Component;
 
 use Osynapsy\Html\Tag as Tag;
-use Osynapsy\Html\Component\Base;
 
-class ComboBox extends Base
-{    
+class ComboBox extends AbstractComponent
+{
     protected $placeholder = ['', '- Seleziona -'];
-    protected $value;    
+    protected $value;
 
     public function __construct($name)
     {
@@ -26,11 +25,11 @@ class ComboBox extends Base
     }
 
     public function prebuild()
-    {        
+    {
         if (!empty($this->placeholder) && is_array($this->dataset)){
             array_unshift($this->dataset, $this->placeholder);
         }
-        $this->optionsFactory();        
+        $this->optionsFactory();
     }
 
     protected function optionsFactory()
@@ -49,7 +48,7 @@ class ComboBox extends Base
         $option = (new Tag('option'))->attribute('value', $value);
         $option->add($label ?? $value);
         if ($disabled) {
-            $this->atttribute('disabled','disabled');
+            $this->attribute('disabled','disabled');
         }
         if ($this->value == $value) {
             $option->attribute('selected', 'selected');
@@ -67,7 +66,7 @@ class ComboBox extends Base
 
     public function setAction($action, array $parameters = [], $confirmMessage = null, $class = 'change-execute')
     {
-        return parent::setAction($action, $parameters, $class, $confirmMessage);
+        return parent::setAction($action, $parameters, $confirmMessage, $class);
     }
 
     public function setValue($value)
