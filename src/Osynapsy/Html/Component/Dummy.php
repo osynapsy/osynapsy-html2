@@ -10,7 +10,7 @@
 
 namespace Osynapsy\Html\Component;
 
-class Dummy extends Base
+class Dummy extends AbstractComponent
 {
     public function __construct($name, $tag = 'div')
     {
