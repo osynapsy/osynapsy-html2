@@ -11,7 +11,7 @@
 
 namespace Osynapsy\Html\Component;
 
-class CheckBox extends Base
+class CheckBox extends AbstractComponent
 {
     private $checkbox = null;    
     private $label;

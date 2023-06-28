@@ -11,9 +11,7 @@
 
 namespace Osynapsy\Html\Component;
 
-use Osynapsy\Html\Component\Base;
-
-class Form extends Base
+class Form extends AbstractComponent
 {
     protected $panel;
 

@@ -11,12 +11,11 @@
 
 namespace Osynapsy\Html\Component;
 
-use Osynapsy\Html\Component\Base;
-
-class Input extends Base
+class Input extends AbstractComponent
 {
     protected $value;
-    
+    public $formatValueFunction;
+
     public function __construct($id, $name, $type)
     {
         parent::__construct('input', $id);
@@ -31,8 +30,10 @@ class Input extends Base
         return $this->getAttribute('value');
     }
 
-    public function setValue($value)
+    public function setValue($rawvalue)
     {
+        $formattingFunction = $this->formatValueFunction;
+        $value = is_callable($formattingFunction) ? $formattingFunction($rawvalue) : $rawvalue;
         $this->attribute('value', $value);
         return $this;
     }

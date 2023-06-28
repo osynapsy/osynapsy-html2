@@ -11,7 +11,7 @@
 
 namespace Osynapsy\Html\Component;
 
-class RadioBox extends Base
+class RadioBox extends AbstractComponent
 {
     protected $label;
     protected $radio;

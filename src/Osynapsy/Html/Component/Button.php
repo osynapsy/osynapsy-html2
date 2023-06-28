@@ -14,7 +14,7 @@ namespace Osynapsy\Html\Component;
 /*
  * Button component
  */
-class Button extends Base
+class Button extends AbstractComponent
 {
     public function __construct($id = null, $label = '', $class = '')
     {

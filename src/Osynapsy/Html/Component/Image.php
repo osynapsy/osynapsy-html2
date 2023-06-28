@@ -11,13 +11,14 @@
 
 namespace Osynapsy\Html\Component;
 
-//Component iframe
-class IFrame extends AbstractComponent
+/**
+ * Image tag factory
+ */
+class Image extends AbstractComponent
 {
     public function __construct($id, $source = null)
     {
-        parent::__construct('iframe', $id);
-        $this->attribute('name', $id);
+        parent::__construct('img', $id);
         if (!empty($source)) {
             $this->attribute('src', $source);
         }

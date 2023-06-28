@@ -49,9 +49,9 @@ class DOM
      * @param $file web path of file;
      * @return void
      */
-    public static function requireJs($file)
+    public static function requireJs($file, $namespace = null)
     {
-        self::requireFile($file, 'js');
+        self::requireFile($file, 'js', $namespace);
     }
 
     /**
@@ -60,7 +60,7 @@ class DOM
      * @param $code js code to append at html page;
      * @return void
      */
-    public static function requireJsCode($code)
+    public static function requireScript($code)
     {
         self::$require[] = [$code, 'script'];
     }
@@ -71,14 +71,14 @@ class DOM
      * @param $file web path of css file;
      * @return void
      */
-    public static function requireCss($file)
+    public static function requireCss($file, $namespace = null)
     {
-        self::requireFile($file, 'css');
+        self::requireFile($file, 'css', $namespace);
     }
 
-    protected static function requireFile($file, $type)
+    protected static function requireFile($file, $type, $namespace = null)
     {
-        $item = [$file, $type];
+        $item = [$file, $type, $namespace];
         if (in_array($item, self::$require)) {
             return;
         }

@@ -17,7 +17,7 @@ use Osynapsy\Html\DOM;
 /*
  * Master class component
  */
-class Base extends Tag
+class AbstractComponent extends Tag
 {
     const EV_CLICK = 'click-execute';
     const EV_CHANGE = 'change-execute';
@@ -116,5 +116,37 @@ class Base extends Tag
             $this->attribute('readonly', 'readonly');
         }
         return $this;
+    }
+
+    public function onClick(callable $listener)
+    {
+        $this->addClass('dispatch-event dispatch-event-click');
+        $this->addListener('Click', $listener);
+    }
+
+    public function onChange(callable $listener)
+    {
+        $this->addClass('dispatch-event dispatch-event-change');
+        $this->addListener('Change', $listener);
+    }
+
+    protected function addListener($event, callable $listener)
+    {        
+        DOM::addEventListener($event, $this->id, $listener);
+    }
+
+    protected function requireJs($filepath)
+    {
+        DOM::requireJs($filepath, get_class($this));
+    }
+
+    protected function requireCss($filepath)
+    {
+        DOM::requireCss($filepath, get_class($this));
+    }
+
+    protected function requireScript($code)
+    {
+        DOM::requireScript($code);
     }
 }

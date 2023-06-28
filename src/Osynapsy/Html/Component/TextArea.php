@@ -12,7 +12,7 @@
 namespace Osynapsy\Html\Component;
 
 
-class TextArea extends Base
+class TextArea extends AbstractComponent
 {
     protected $value;
     

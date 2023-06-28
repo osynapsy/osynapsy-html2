@@ -12,7 +12,7 @@
 namespace Osynapsy\Html\Component;
 
 
-class Link extends Base
+class Link extends AbstractComponent
 {
     public function __construct($id, $link, $label, $class = '')
     {

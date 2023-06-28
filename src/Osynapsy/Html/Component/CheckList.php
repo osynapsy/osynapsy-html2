@@ -13,7 +13,7 @@ namespace Osynapsy\Html\Component;
 
 use Osynapsy\Html\Tag;
 
-class CheckList extends Base
+class CheckList extends AbstractComponent
 {
     private $parents = [];
 
