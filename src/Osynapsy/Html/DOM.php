@@ -76,13 +76,30 @@ class DOM
         self::requireFile($file, 'css', $namespace);
     }
 
-    protected static function requireFile($file, $type, $namespace = null)
+    protected static function requireFile($rawPathFile, $type, $namespace = null)
     {
-        $item = [$file, $type, $namespace];
-        if (in_array($item, self::$require)) {
-            return;
+        $osyPathPrefix = !empty($namespace) && $rawPathFile[0] !== '/' ? self::buildScriptWebPathWithComposer($namespace, $rawPathFile) : '';
+        $item = [$rawPathFile, $type, $osyPathPrefix . $rawPathFile];
+        if (!in_array($item, self::$require)) {
+            self::$require[] = $item;
+        }        
+    }
+
+    protected static function buildScriptWebPathWithComposer($objectNamespace)
+    {
+        $class = new \ReflectionClass($objectNamespace);
+        $packageName = self::getComposerPackageName($class->getNamespaceName(), pathinfo($class->getFileName())['dirname']);        
+        return sprintf('/assets/%s/', sha1($packageName));
+    }
+
+    protected static function getComposerPackageName($namespace, $classpath)
+    {
+        $composerPath = realpath(str_replace(array_map(function ($elem) { return '/'.$elem;}, explode('\\',$namespace)), '', $classpath).'/../composer.json');
+        if (!file_exists($composerPath)) {
+            throw new \Exception(sprintf('Composer file not found in %s', $composerPath));
         }
-        self::$require[] = $item;
+        $composerParams = json_decode(file_get_contents($composerPath), true);
+        return key($composerParams['autoload']['psr-4']);
     }
 
     protected static function requireAssetFile($file, $type)
