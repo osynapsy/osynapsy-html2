@@ -18,10 +18,10 @@ class ComboBox extends AbstractComponent
     protected $placeholder = ['', '- Seleziona -'];
     protected $value;
 
-    public function __construct($name)
+    public function __construct($id, $class = null)
     {
-        parent::__construct('select', $name);
-        $this->attribute('name', $name);
+        parent::__construct('select', $id);
+        $this->attributes(['name' => $id, 'class' => $class]);
     }
 
     public function prebuild()

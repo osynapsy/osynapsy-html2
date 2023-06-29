@@ -13,9 +13,9 @@ namespace Osynapsy\Html\Component;
 //costruttore del text box
 class InputText extends Input
 {
-    public function __construct($name, $id = null)
+    public function __construct($id, $class = null)
     {
-        parent::__construct($name, $id ?? $name, 'text');
+        parent::__construct($id, 'text', $class);
     }
 
     public function onTyping($jsCode)

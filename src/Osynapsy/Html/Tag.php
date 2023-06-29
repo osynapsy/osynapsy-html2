@@ -11,10 +11,10 @@
 namespace Osynapsy\Html;
 
 class Tag
-{   
+{
     private $attributes = [];
     private $childs = [];
-    private $tag;   
+    private $tag;
     public $parent;
 
     /**
@@ -43,7 +43,7 @@ class Tag
      */
     public function __get($attributeId)
     {
-        return $attributeId == 'tag' ? $this->tag : $this->getAttribute($attributeId);        
+        return $attributeId == 'tag' ? $this->tag : $this->getAttribute($attributeId);
     }
 
     /**
@@ -52,7 +52,7 @@ class Tag
      * @param type $value
      */
     public function __set($attribute, $value)
-    {        
+    {
         $this->attribute($attribute, $value);
     }
 
@@ -64,7 +64,7 @@ class Tag
      */
     public function add($child)
     {
-        if ($child instanceof Tag) {            
+        if ($child instanceof Tag) {
             $child->parent =& $this;
         }
         //Append child to childs repo
@@ -72,7 +72,7 @@ class Tag
         //If child isn't object return $this tag
         return !is_object($child) ? $this : $child;
     }
-    
+
     /**
      * Add childs from array
      *
@@ -96,7 +96,7 @@ class Tag
     public function addStyle($style, $value)
     {
         return $this->appendToAttribute('style', sprintf('%s: %s;', $style, $value));
-    }   
+    }
 
     /**
      * Add attribute on tag
@@ -107,23 +107,25 @@ class Tag
      * @return $this
      */
     public function attribute($attribute, $value)
-    {        
+    {
         if (is_array($value)) {
             throw new \Exception('Illegal content of value attribute (' . print_r($value, true) . ')');
         }
-        $this->attributes[$attribute] = $value;
+        if (!is_null($value)) {
+            $this->attributes[$attribute] = $value;
+        }
         return $this;
     }
-    
+
     public function appendToAttribute($attribute, $value)
     {
         $this->attribute($attribute, trim($this->getAttribute($attribute). ' ' . $value));
     }
-    
+
     /**
      * Massive add of attributes on tag
      *
-     * @param array $attributes     
+     * @param array $attributes
      * @return $this
      */
     public function attributes(array $attributes)
@@ -135,19 +137,19 @@ class Tag
     }
 
     public function preBuild()
-    {        
+    {
     }
-    
+
     /**
      * Build html tag e return string
      *
      * @return string
      */
     protected function build()
-    {        
+    {
         return TagBuilder::build($this);
     }
-        
+
     /**
      * Static method for create a tag object
      *
@@ -174,7 +176,7 @@ class Tag
     {
         return array_key_exists($attributeId, $this->attributes) ? $this->attributes[$attributeId] : null;
     }
-    
+
     public function getAttributes()
     {
         return $this->attributes;
@@ -197,13 +199,13 @@ class Tag
      * @return boolean
      */
     public function getChild($index = 0)
-    {        
+    {
         if (array_key_exists($index, $this->childs)) {
             return $this->childs[$index];
         }
         return false;
     }
-    
+
     public function getChilds()
     {
         return $this->childs;

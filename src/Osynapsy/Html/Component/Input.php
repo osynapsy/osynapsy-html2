@@ -16,15 +16,16 @@ class Input extends AbstractComponent
     protected $value;
     public $formatValueFunction;
 
-    public function __construct($id, $name, $type)
+    public function __construct($id, $type, $class = null)
     {
         parent::__construct('input', $id);
         $this->attributes([
             'type' => $type,
-            'name' => $name            
-        ]);             
+            'name' => $id,
+            'class' => $class
+        ]);
     }
-    
+
     public function getValue()
     {
         return $this->getAttribute('value');

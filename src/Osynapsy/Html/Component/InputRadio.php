@@ -9,20 +9,20 @@ namespace Osynapsy\Html\Component;
 class InputRadio extends Input
 {
     protected $checked;
-    
-    public function __construct($id, $name, $value = 1)
+
+    public function __construct($id, $class = null, $value = 1)
     {
-        parent::__construct($id, $name, 'radio');
+        parent::__construct($id, 'radio', $class);
         $this->setValue($value);
     }
-    
+
     public function preBuild()
     {
         if ($this->checked) {
             $this->attribute('checked', 'checked');
         }
     }
-    
+
     public function setDisabled($condition)
     {
         if ($condition) {
@@ -30,9 +30,9 @@ class InputRadio extends Input
         }
         return $this;
     }
-    
+
     public function setChecked($condition)
-    {        
-        $this->checked = $condition ? true : false;        
+    {
+        $this->checked = $condition ? true : false;
     }
 }

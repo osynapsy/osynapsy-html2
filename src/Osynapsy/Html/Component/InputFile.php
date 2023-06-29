@@ -14,11 +14,8 @@ namespace Osynapsy\Html\Component;
 
 class InputFile extends Input
 {
-    public function __construct($id, $name = null, $class = '')
+    public function __construct($id, $class = '')
     {
-        parent::__construct($id, $name ?? $id, 'file');
-        if (!empty($class)) {
-            $this->addClass($class);
-        }
+        parent::__construct($id, 'file', $class);
     }
 }

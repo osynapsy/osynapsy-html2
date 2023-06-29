@@ -15,23 +15,23 @@ namespace Osynapsy\Html\Component;
 class TextArea extends AbstractComponent
 {
     protected $value;
-    
-    public function __construct($id)
+
+    public function __construct($id, $class = null)
     {
         parent::__construct('textarea', $id);
-        $this->attribute('name', $id);
+        $this->attributes(['name' => $id, 'class' => $class]);
     }
 
     public function prebuild()
     {
-        $this->add($this->value);        
+        $this->add($this->value);
     }
 
     public function setAction($action, $parameters = null, $confirmMessage = null, $class = self::EV_CHANGE)
     {
         return parent::setAction($action, $parameters, $confirmMessage, $class);
     }
-    
+
     public function setValue($value)
     {
         $this->value = $value;

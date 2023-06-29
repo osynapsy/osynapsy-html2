@@ -13,9 +13,9 @@ namespace Osynapsy\Html\Component;
 
 class InputPassword extends Input
 {
-    public function __construct($name, $id = null)
+    public function __construct($id, $class = null)
     {
-        parent::__construct($name, $id ?? $name, 'password');
+        parent::__construct( $id, 'password', $class);
         $this->attribute('autocomplete','off');
     }
 

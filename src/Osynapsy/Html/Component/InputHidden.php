@@ -14,11 +14,8 @@ namespace Osynapsy\Html\Component;
 
 class InputHidden extends Input
 {
-    public function __construct($id, $name = null, $class = '')
+    public function __construct($id, $class = null)
     {
-        parent::__construct($id, $name ?? $id, 'hidden');
-        if (!empty($class)) {
-            $this->addClass($class);
-        }
+        parent::__construct($id, 'hidden', $class);
     }
 }
