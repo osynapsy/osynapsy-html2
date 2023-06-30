@@ -77,7 +77,7 @@ class DOM
     }
 
     protected static function requireFile($rawPathFile, $type, $namespace = null)
-    {
+    {        
         $osyPathPrefix = !empty($namespace) && $rawPathFile[0] !== '/' ? self::buildScriptWebPathWithComposer($namespace, $rawPathFile) : '';
         $item = [$rawPathFile, $type, $osyPathPrefix . $rawPathFile];
         if (!in_array($item, self::$require)) {
@@ -86,7 +86,7 @@ class DOM
     }
 
     protected static function buildScriptWebPathWithComposer($objectNamespace)
-    {
+    {        
         $class = new \ReflectionClass($objectNamespace);
         $packageName = self::getComposerPackageName($class->getNamespaceName(), pathinfo($class->getFileName())['dirname']);        
         return sprintf('/assets/%s/', sha1($packageName));
