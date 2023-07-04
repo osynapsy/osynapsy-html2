@@ -19,7 +19,7 @@ class InputPassword extends Input
         $this->attribute('autocomplete','off');
     }
 
-    public function setAction($action, $parameters = null, $confirmMessage = null, $class = self::EV_CHANGE)
+    public function setAction($action, array $parameters = [], $confirmMessage = null, $class = self::EV_CHANGE)
     {
         return parent::setAction($action, $parameters, $confirmMessage, $class);
     }
