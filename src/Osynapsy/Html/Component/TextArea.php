@@ -27,7 +27,7 @@ class TextArea extends AbstractComponent
         $this->add($this->value);
     }
 
-    public function setAction($action, $parameters = null, $confirmMessage = null, $class = self::EV_CHANGE)
+    public function setAction($action, array $parameters = [], $confirmMessage = null, $class = self::EV_CHANGE)
     {
         return parent::setAction($action, $parameters, $confirmMessage, $class);
     }
