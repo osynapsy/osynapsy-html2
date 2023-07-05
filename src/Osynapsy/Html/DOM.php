@@ -11,10 +11,14 @@ class DOM
     protected static $dom = [];
     protected static $require = [];
     protected static $actions = [];
+    protected static $values = [];
 
-    public static function append($id, Tag $component)
+    public static function append($elementId, Tag $component)
     {
-        self::$dom[$id] = $component;
+        self::$dom[$elementId] = $component;
+        if (array_key_exists($elementId, self::$values) && method_exists(self::$dom[$elementId], 'setValue')) {
+            self::$dom[$elementId]->setValue(self::$values[$elementId]);
+        }
     }
 
     /**
@@ -77,18 +81,18 @@ class DOM
     }
 
     protected static function requireFile($rawPathFile, $type, $namespace = null)
-    {        
+    {
         $osyPathPrefix = !empty($namespace) && $rawPathFile[0] !== '/' ? self::buildScriptWebPathWithComposer($namespace, $rawPathFile) : '';
         $item = [$rawPathFile, $type, $osyPathPrefix . $rawPathFile];
         if (!in_array($item, self::$require)) {
             self::$require[] = $item;
-        }        
+        }
     }
 
     protected static function buildScriptWebPathWithComposer($objectNamespace)
-    {        
+    {
         $class = new \ReflectionClass($objectNamespace);
-        $packageName = self::getComposerPackageName($class->getNamespaceName(), pathinfo($class->getFileName())['dirname']);        
+        $packageName = self::getComposerPackageName($class->getNamespaceName(), pathinfo($class->getFileName())['dirname']);
         return sprintf('/assets/%s/', sha1($packageName));
     }
 
@@ -124,5 +128,13 @@ class DOM
     public static function addEventListener($event, $sourceId, $action)
     {
         self::$actions[$sourceId.'.'.$event] = $action;
+    }
+
+    public static function setValue($elementId, $value)
+    {
+        self::$values[$elementId] = $value;
+        if (array_key_exists($elementId, self::$dom) && method_exists(self::$dom[$elementId], 'setValue')) {
+            self::$dom[$elementId]->setValue($value);
+        }
     }
 }
