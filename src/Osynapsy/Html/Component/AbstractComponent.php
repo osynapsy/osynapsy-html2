@@ -13,6 +13,7 @@ namespace Osynapsy\Html\Component;
 
 use Osynapsy\Html\Tag;
 use Osynapsy\Html\DOM;
+use Osynapsy\Mvc\Action\ActionInterface;
 
 /*
  * Master class component
@@ -46,16 +47,20 @@ class AbstractComponent extends Tag
     /**
      * Set action to recall via ajax
      *
-     * @param string $action name of the action without Action final
+     * @param string $actionClass name of the external action without Action final
      * @param string $parameters parameters list (comma separated) to pass action
      * @param string $confirmMessage prompt Message showed before action executed.
      * @param string $eventClass css class associated at event required to execute action
      * @return $this
      */
-    public function setAction($action, array $parameters = [], $confirmMessage = null, $eventClass = self::EV_CLICK)
+    public function setAction(string $actionClass, array $parameters = [], $confirmMessage = null, $eventClass = self::EV_CLICK)
     {
+        if (class_exists($actionClass) && !in_array(ActionInterface::class, class_implements($actionClass) ?: [])) {
+            throw new \Exception(sprintf("Class %s must implement interface %s %s", $actionClass, ActionInterface::class, print_r(class_implements($actionClass), true)));
+        }
+        $action = class_exists($actionClass) ? sha1($actionClass) : $actionClass;
         $this->addClass($eventClass);
-        $this->attribute('data-action',$action);
+        $this->attribute('data-action', $action);
         if (!empty($parameters)) {
             $this->attribute('data-action-parameters', implode(',', $parameters));
         }
@@ -131,8 +136,12 @@ class AbstractComponent extends Tag
     }
 
     protected function addListener($event, callable $listener)
-    {        
+    {
         DOM::addEventListener($event, $this->id, $listener);
+        if (class_exists('\Osynapsy\Event\Dispatcher')) {
+            $eventId = sprintf('%s%s', $this->id, $event);
+            \Osynapsy\Event\Dispatcher::addListener($listener, [$eventId]);
+        }
     }
 
     protected function requireJs($filepath)
