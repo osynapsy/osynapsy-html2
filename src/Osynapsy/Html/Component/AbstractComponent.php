@@ -13,7 +13,7 @@ namespace Osynapsy\Html\Component;
 
 use Osynapsy\Html\Tag;
 use Osynapsy\Html\DOM;
-use Osynapsy\Mvc\Action\ActionInterface;
+use Osynapsy\Action\ActionInterface;
 
 /*
  * Master class component
