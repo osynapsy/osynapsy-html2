@@ -29,7 +29,7 @@ class CheckList extends AbstractComponent
         foreach ($this->dataset as $value) {
             $value[2] = in_array($value[0], $requestValues) ? true : false;
             $this->add($this->rowFactory($value));
-        }        
+        }
     }
 
     protected function rowFactory($value, $level = 0)
@@ -47,7 +47,7 @@ class CheckList extends AbstractComponent
 
     protected function checkBoxFactory($value)
     {
-        $CheckBox = new CheckBox(sprintf('%s[]', $this->id), $value[1], $value[0], 'span');
+        $CheckBox = new CheckBox(sprintf('%s[]', $this->id.'_'.$value[0]), $value[1], $value[0], 'span');
         if (!empty($value[2])) {
            $CheckBox->getCheckbox()->attribute('checked', 'checked');
         }
@@ -55,7 +55,7 @@ class CheckList extends AbstractComponent
     }
 
     public function setDataset(array $dataset)
-    {        
+    {
         foreach($dataset as $rec) {
             if (empty($rec['parent'])) {
                 $this->dataset[] = array_slice(array_values($rec), 0 ,2);
