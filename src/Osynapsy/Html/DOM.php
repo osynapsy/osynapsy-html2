@@ -12,6 +12,7 @@ class DOM
     protected static $require = [];
     protected static $actions = [];
     protected static $values = [];
+    protected static $title;
 
     public static function append($elementId, Tag $component)
     {
@@ -35,6 +36,11 @@ class DOM
     public static function getAllComponents()
     {
         return self::$dom;
+    }
+
+    public static function getTitle()
+    {
+        return self::$title;
     }
 
     /**
@@ -66,7 +72,24 @@ class DOM
      */
     public static function requireScript($code)
     {
-        self::$require[] = [$code, 'script'];
+        $scriptElm = [$code, 'script'];
+        if (!in_array($scriptElm, self::$require)) {
+            self::$require[] = $scriptElm;
+        }
+    }
+
+    /**
+     * Append required js code to list of required initialization
+     *
+     * @param $code js code to append at html page;
+     * @return void
+     */
+    public static function requireStyle($code)
+    {
+        $styleElm = [$code, 'style'];
+        if (!in_array($styleElm, self::$require)) {
+            self::$require[] = $styleElm;
+        }
     }
 
     /**
@@ -136,5 +159,10 @@ class DOM
         if (array_key_exists($elementId, self::$dom) && method_exists(self::$dom[$elementId], 'setValue')) {
             self::$dom[$elementId]->setValue($value);
         }
+    }
+
+    public static function setTitle($title)
+    {
+        self::$title = $title;
     }
 }
