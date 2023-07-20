@@ -11,15 +11,14 @@ class DOM
     protected static $dom = [];
     protected static $require = [];
     protected static $actions = [];
-    protected static $values = [];
     protected static $title;
 
     public static function append($elementId, Tag $component)
-    {
-        self::$dom[$elementId] = $component;
-        if (array_key_exists($elementId, self::$values) && method_exists(self::$dom[$elementId], 'setValue')) {
-            self::$dom[$elementId]->setValue(self::$values[$elementId]);
+    {        
+        if (method_exists($component, 'setValue') && array_key_exists($elementId, $_REQUEST)) {
+            $component->setValue($_REQUEST[$elementId]);
         }
+        self::$dom[$elementId] = $component;
     }
 
     /**
@@ -151,14 +150,6 @@ class DOM
     public static function addEventListener($event, $sourceId, $action)
     {
         self::$actions[$sourceId.'.'.$event] = $action;
-    }
-
-    public static function setValue($elementId, $value)
-    {
-        self::$values[$elementId] = $value;
-        if (array_key_exists($elementId, self::$dom) && method_exists(self::$dom[$elementId], 'setValue')) {
-            self::$dom[$elementId]->setValue($value);
-        }
     }
 
     public static function setTitle($title)
