@@ -14,7 +14,7 @@ class DOM
     protected static $title;
 
     public static function append($elementId, Tag $component)
-    {        
+    {
         if (method_exists($component, 'setValue') && array_key_exists($elementId, $_REQUEST)) {
             $component->setValue($_REQUEST[$elementId]);
         }
