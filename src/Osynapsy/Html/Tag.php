@@ -89,8 +89,7 @@ class Tag
 
     public function addClass($class)
     {
-        $this->appendToAttribute('class', $class);
-        return $this;
+        return $this->appendToAttribute('class', $class);
     }
 
     public function addStyle($style, $value)
@@ -120,6 +119,7 @@ class Tag
     public function appendToAttribute($attribute, $value)
     {
         $this->attribute($attribute, trim($this->getAttribute($attribute). ' ' . $value));
+        return $this;
     }
 
     /**
