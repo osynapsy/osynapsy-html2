@@ -74,16 +74,26 @@ class Tag
     }
 
     /**
-     * Add childs from array
+     * Add childs to repo
      *
-     * @param array $childCollection
+     * @param $childs
      * @return $this
      */
-    public function addFromArray(array $childCollection)
+    public function append($childs)
     {
-        foreach ($childCollection as $child) {
-            $this->add($child);
-        }
+        $this->childs = array_merge($this->childs, is_array($childs) ? $childs : [$childs]);
+        return $this;
+    }
+
+    /**
+     * Prepend childs to repo
+     *
+     * @param $childs
+     * @return $this
+     */
+    public function prepend($childs)
+    {
+        $this->childs = array_merge(is_array($childs) ? $childs : [$childs], $this->childs);
         return $this;
     }
 
