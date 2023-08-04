@@ -82,7 +82,7 @@ class Tag
     public function append($childs)
     {
         $this->childs = array_merge($this->childs, is_array($childs) ? $childs : [$childs]);
-        return $this;
+        return $childs instanceof Tag ? $childs : $this;
     }
 
     /**
@@ -94,7 +94,7 @@ class Tag
     public function prepend($childs)
     {
         $this->childs = array_merge(is_array($childs) ? $childs : [$childs], $this->childs);
-        return $this;
+        return $childs instanceof Tag ? $childs : $this;
     }
 
     public function addClass($class)
