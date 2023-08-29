@@ -23,7 +23,10 @@ class ComboBoxTree extends ComboBox
     public $placeholder = ['', 'Seleziona .....', null];
 
     public function preBuild()
-    {        
+    {
+        if (!empty($this->placeholder) && is_array($this->dataset)){
+            array_unshift($this->dataset, $this->placeholder);
+        }
         $datasetGrouped = $this->datasetTreeFactory($this->dataset ?? []);
         if (!empty($datasetGrouped) && array_key_exists(self::MAIN_BRANCH_ID, $datasetGrouped)) {
             $this->treeFactory($datasetGrouped[self::MAIN_BRANCH_ID], $datasetGrouped);
@@ -45,7 +48,7 @@ class ComboBoxTree extends ComboBox
     }
 
     protected function treeFactory(array $curDatasetBranch, array $datasetGrouped, int $level = 0)
-    {        
+    {
         foreach ($curDatasetBranch as $leaf) {
             list($leafId, $leafLabel, ) = array_slice($leaf, 0, 3);
             $label = sprintf('%s%s', str_repeat('&nbsp;', $level * 5) , $leafLabel ?? $leafId);
@@ -54,5 +57,5 @@ class ComboBoxTree extends ComboBox
                 $this->treeFactory($datasetGrouped[$leafId], $datasetGrouped, $level + 1);
             }
         }
-    }   
+    }
 }
