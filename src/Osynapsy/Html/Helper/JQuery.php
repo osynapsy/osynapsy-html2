@@ -11,6 +11,8 @@
 
 namespace Osynapsy\Html\Helper;
 
+use Osynapsy\Controller\ControllerInterface;
+
 /**
  * Description of JQuery
  *
@@ -18,14 +20,14 @@ namespace Osynapsy\Html\Helper;
  */
 class JQuery
 {
-    private $elements = array();
-    private $selector = '';
-    private $response;
+    private $elements = [];
+    private $selector;
+    private $controller;
 
-    public function __construct($selector, $response = null)
+    public function __construct($selector, ControllerInterface $controller = null)
     {
         $this->selector = $selector;
-        $this->response = $response;
+        $this->controller = $controller;
     }
 
     public function __call($method, $params)
@@ -70,6 +72,6 @@ class JQuery
 
     public function exec()
     {
-        $this->response->js($this->__toString());
+        $this->controller->js($this);
     }
 }
