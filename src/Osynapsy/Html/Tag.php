@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Osynapsy package.
  *
@@ -10,6 +11,11 @@
 
 namespace Osynapsy\Html;
 
+/**
+ * Description of Tag
+ *
+ * @author Pietro Celeste <p.celeste@osynapsy.net>
+ */
 class Tag
 {
     private $attributes = [];

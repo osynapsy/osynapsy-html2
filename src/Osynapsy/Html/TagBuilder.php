@@ -1,22 +1,32 @@
 <?php
+
+/*
+ * This file is part of the Osynapsy package.
+ *
+ * (c) Pietro Celeste <p.celeste@osynapsy.net>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Osynapsy\Html;
 
 /**
  * Description of TagBuilder
  *
- * @author peter
+ * @author Pietro Celeste <p.celeste@osynapsy.net>
  */
 class TagBuilder
 {
     const TAG_WITHOUT_CLOSURE = ['input', 'img', 'link', 'meta'];
     const DUMMY_TAG = 'dummy';
-    
+
     public static function build(Tag $tagObject, $depth = 0)
     {
-        $tagObject->preBuild(); 
-        return $tagObject->getTag() === self::DUMMY_TAG ? self::buildBodyOfTag($tagObject, $depth - 1) : self::buildTag($tagObject, $depth);        
+        $tagObject->preBuild();
+        return $tagObject->getTag() === self::DUMMY_TAG ? self::buildBodyOfTag($tagObject, $depth - 1) : self::buildTag($tagObject, $depth);
     }
-    
+
     protected static function buildTag($tagObject, $depth)
     {
         $tag = $tagObject->getTag();
