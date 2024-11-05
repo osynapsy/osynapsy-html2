@@ -16,7 +16,7 @@ namespace Osynapsy\Html\Component;
  *
  * @author Pietro Celeste <p.celeste@osynapsy.net>
  */
-interface PaginationInterface
+interface PaginatorInterface
 {
     public function addFilter($field, $value = null);
 
