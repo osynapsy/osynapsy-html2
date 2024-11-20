@@ -78,6 +78,7 @@ class ComboBox extends AbstractComponent
     public function setPlaceholder($label, $value = '')
     {
         $this->placeholder = $label === false ? [] : [$value, $label, null];
+        $this->attribute('placeholder', $label);
         return $this;
     }
 }
