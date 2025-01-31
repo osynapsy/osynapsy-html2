@@ -47,7 +47,8 @@ class CheckList extends AbstractComponent
 
     protected function checkBoxFactory($value)
     {
-        $CheckBox = new CheckBox(sprintf('%s[]', $this->id.'_'.$value[0]), $value[1], $value[0], 'span');
+        $CheckBox = new CheckBox(sprintf('%s', $this->id.'_'.$value[0]), $value[1], $value[0], 'span');
+        $CheckBox->getCheckbox()->attribute('name', $this->id . '[]');
         if (!empty($value[2])) {
            $CheckBox->getCheckbox()->attribute('checked', 'checked');
         }
