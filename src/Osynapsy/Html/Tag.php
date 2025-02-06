@@ -227,6 +227,12 @@ class Tag
         return $this->childs;
     }
 
+    public function removeAllChildren()
+    {
+        $this->childs = [];
+        return $this;
+    }
+    
     /**
      * Check if tag content is empty
      *
@@ -236,7 +242,7 @@ class Tag
     {
         return count($this->childs) > 0 ? false : true;
     }
-
+    
     /**
      * Magic method for rendering tag in html
      *
