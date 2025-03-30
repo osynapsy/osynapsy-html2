@@ -25,11 +25,28 @@ class CheckList extends AbstractComponent
 
     public function preBuild()
     {
-        $requestValues = $_REQUEST[$this->id] ?? [];
+        $checkedItems = $this->getCheckedItems($this->dataset);
         foreach ($this->dataset as $value) {
-            $value[2] = in_array($value[0], $requestValues) ? true : false;
+            $value[2] = in_array($value[0], $checkedItems) ? true : false;
             $this->add($this->rowFactory($value));
         }
+    }
+
+    protected function getCheckedItems($dataset)
+    {
+        if (array_key_exists($this->id, $_REQUEST)) {
+            return $_REQUEST[$this->id];
+        }
+        if (empty($dataset) || !array_key_exists(2, $dataset[0])) {
+            return [];
+        }
+        $result = [];
+        foreach($dataset as $row) {
+            if (!empty($row[2])) {
+                $result[] = $row[0];
+            }
+        }
+        return $result;
     }
 
     protected function rowFactory($value, $level = 0)
