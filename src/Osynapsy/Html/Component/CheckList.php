@@ -76,7 +76,7 @@ class CheckList extends AbstractComponent
     {
         foreach($dataset as $rec) {
             if (empty($rec['parent'])) {
-                $this->dataset[] = array_slice(array_values($rec), 0 ,2);
+                $this->dataset[] = array_slice(array_values($rec), 0 ,3);
             } else {
                 $this->parents[$rec['parent']][] = $rec;
             }
