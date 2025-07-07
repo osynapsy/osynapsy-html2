@@ -69,16 +69,33 @@ class ComboBox extends AbstractComponent
         return parent::setAction($action, $parameters, $confirmMessage, $class);
     }
 
-    public function setValue($value)
+    public function selectOptionByIndexIfEmpty(int $idx)
     {
-        $this->value = $value;
-        return $this;
+        if (!array_key_exists($this->id, $_REQUEST) && !empty($this->dataset) && !empty($this->dataset[$idx])) {
+            $this->setValue(array_values($this->dataset[$idx])[0]);
+        }
     }
 
+    public function selectOptionByValueIfEmpty($value)
+    {
+        if (!is_null($value) && !empty($this->dataset)) {
+            $idx = array_search($value, array_column($this->dataset, 0));
+            if ($idx !== false) {
+                $this->selectOptionByIndexIfEmpty($idx);
+            }
+        }        
+    }
+    
     public function setPlaceholder($label, $value = '')
     {
         $this->placeholder = $label === false ? [] : [$value, $label, null];
         $this->attribute('placeholder', $label);
+        return $this;
+    }
+    
+    public function setValue($value)
+    {
+        $this->value = $value;
         return $this;
     }
 }
