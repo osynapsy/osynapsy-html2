@@ -152,6 +152,20 @@ class Tag
         return $this;
     }
 
+     /**
+     * Remove an attribute from a tag
+     *
+     * @param string $attributeId do remove
+     * @return $this
+     */
+    public function removeAttribute($attributeId)
+    {
+        if (array_key_exists($attributeId, $this->attributes)) {
+            unset($this->attributes[$attributeId]);
+        }
+        return $this;
+    }
+
     public function preBuild()
     {
     }
@@ -232,7 +246,7 @@ class Tag
         $this->childs = [];
         return $this;
     }
-    
+
     /**
      * Check if tag content is empty
      *
@@ -242,7 +256,7 @@ class Tag
     {
         return count($this->childs) > 0 ? false : true;
     }
-    
+
     /**
      * Magic method for rendering tag in html
      *
