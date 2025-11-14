@@ -24,7 +24,7 @@ class TagBuilder
     public static function build(Tag $tagObject, $depth = 0)
     {
         $tagObject->preBuild();
-        return $tagObject->getTag() === self::DUMMY_TAG ? self::buildBodyOfTag($tagObject, $depth - 1) : self::buildTag($tagObject, $depth);
+        return $tagObject->getTag() === self::DUMMY_TAG ? self::buildBodyOfTag($tagObject, $depth) : self::buildTag($tagObject, $depth);
     }
 
     protected static function buildTag($tagObject, $depth)
