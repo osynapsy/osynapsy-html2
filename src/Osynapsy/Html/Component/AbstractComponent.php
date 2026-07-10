@@ -28,7 +28,7 @@ class AbstractComponent extends Tag
 
     public function __construct($tag, $id = null)
     {
-        parent::__construct($tag, $id);
+        parent::__construct($tag, $id, 'osy-component');        
         if (!empty($id)) {
             DOM::append($id, $this);
         }
