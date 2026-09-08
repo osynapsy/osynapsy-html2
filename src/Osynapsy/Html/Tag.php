@@ -266,4 +266,10 @@ class Tag
     {
         return $this->get();
     }
+    
+    public function __call($attribute, array $values)
+    {
+        $this->attribute($attribute, implode(' ', $values));
+        return $this;
+    }
 }
