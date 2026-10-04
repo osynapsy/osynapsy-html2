@@ -24,7 +24,7 @@ class AbstractComponent extends Tag
     const EV_CHANGE = 'change-execute';
     const EV_KEYPRESS = 'keypress-execute';
 
-    protected $dataset = [];
+    protected $dataset = [];    
 
     public function __construct($tag, $id = null)
     {
@@ -144,9 +144,12 @@ class AbstractComponent extends Tag
         }
     }
 
-    protected function requireJs($filepath)
+    protected function requireJs($filepath, $jsinit = null)
     {
         DOM::requireJs($filepath, get_class($this));
+        if (!empty($jsinit)) {
+            $this->appendToAttribute('data-init', $jsinit);
+        }
     }
 
     protected function requireCss($filepath)
@@ -154,8 +157,11 @@ class AbstractComponent extends Tag
         DOM::requireCss($filepath, get_class($this));
     }
 
-    protected function requireScript($code)
+    protected function requireScript($code, $jsinit = null)
     {
         DOM::requireScript($code);
+        if (!empty($jsinit)) {
+            $this->appendToAttribute('data-init', $jsinit);
+        }
     }
 }
