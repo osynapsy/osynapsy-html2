@@ -58,6 +58,7 @@ class Panel extends AbstractComponent
     public function addRow()
     {
         $this->currentRow = $this->add(new Tag($this->tags['row'], null, $this->rowClass));
+        return $this->currentRow;
     }
     
     public function addCell($class = '', $colspan = 1, $rowspan = 1)
@@ -65,14 +66,14 @@ class Panel extends AbstractComponent
         if (empty($this->currentRow)) {
             $this->addRow();
         }
-        $tableCell = $this->currentRow->add(new Tag($this->tags['cell'], null, trim($class. ' '.$this->cellClass)));
+        $this->currentCell = $this->currentRow->add(new Tag($this->tags['cell'], null, trim($class. ' '.$this->cellClass)));
         if ($rowspan > 1) {
             $this->currentCell->attribute('rowspan', $rowspan);
         }
         if ($colspan > 1) {
             $this->currentCell->attribute('colspan', $colspan);
         }
-        return $tableCell->add(new PanelCell());
+        return $this->currentCell;
     }
     
     public function getCurrentRow()

@@ -266,10 +266,18 @@ class Tag
     {
         return $this->get();
     }
-    
-    public function __call($attribute, array $values)
+
+    public function __call($method, array $values)
     {
-        $this->attribute($attribute, implode(' ', $values));
+        $action = substr($method,0,3);
+        $attributeId = strtolower(substr($method, 3));
+        if (empty($attributeId) || !in_array($action, ['set', 'add'])) {
+            return throw new \Exception(sprintf('Method %s do not exists in %s', $method, get_class($this)));
+        }
+        match($action) {
+            'set' => $this->attribute($attributeId, implode(' ', $values)),
+            'add' => $this->appendToAttribute($attributeId, implode(' ', $values)),
+        };
         return $this;
     }
 }
